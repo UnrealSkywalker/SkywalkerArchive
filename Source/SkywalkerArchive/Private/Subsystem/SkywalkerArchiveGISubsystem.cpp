@@ -9,12 +9,37 @@ DEFINE_LOG_CATEGORY_STATIC(SkywalkerArchive, Log, All);
 
 USkywalkerArchiveGISubsystem::USkywalkerArchiveGISubsystem() :UGameInstanceSubsystem()
 {
+	//// 创建 USkywalkerLocalPlayerSaveGame
+	//LocalPlayerSaveGame = Cast<USkywalkerLocalPlayerSaveGame>(UGameplayStatics::CreateSaveGameObject(USkywalkerLocalPlayerSaveGame::StaticClass()));
+	//if (LocalPlayerSaveGame == nullptr)
+	//{
+	//	UE_LOG(SkywalkerArchive, Error, TEXT("Create USkywalkerLocalPlayerSaveGame failed!"));
+	//}
+}
+
+bool USkywalkerArchiveGISubsystem::CreateSaveGameObject(TSubclassOf<USkywalkerLocalPlayerSaveGame> SaveGameClass)
+{
+	if (SaveGameClass == nullptr)
+	{
+		UE_LOG(SkywalkerArchive, Error, TEXT("SaveGameClass is nullptr!"));
+		return false;
+	}
+
+	if (LocalPlayerSaveGame != nullptr)
+	{
+		UE_LOG(SkywalkerArchive, Error, TEXT("USkywalkerLocalPlayerSaveGame is not nullptr!"));
+		return false;
+	}
+
 	// 创建 USkywalkerLocalPlayerSaveGame
-	LocalPlayerSaveGame = Cast<USkywalkerLocalPlayerSaveGame>(UGameplayStatics::CreateSaveGameObject(USkywalkerLocalPlayerSaveGame::StaticClass()));
+	LocalPlayerSaveGame = Cast<USkywalkerLocalPlayerSaveGame>(UGameplayStatics::CreateSaveGameObject(SaveGameClass));
 	if (LocalPlayerSaveGame == nullptr)
 	{
 		UE_LOG(SkywalkerArchive, Error, TEXT("Create USkywalkerLocalPlayerSaveGame failed!"));
+		return false;
 	}
+
+	return true;
 }
 
 void USkywalkerArchiveGISubsystem::SetSaveGame(const FString& SlotName, const int32 UserIndex)

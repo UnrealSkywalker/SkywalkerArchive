@@ -23,6 +23,12 @@ public:
 	USkywalkerArchiveGISubsystem();
 
 	/**
+	* 创建存档对象
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
+	bool CreateSaveGameObject(TSubclassOf<USkywalkerLocalPlayerSaveGame> SaveGameClass);
+
+	/**
 	* 设置存档
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
