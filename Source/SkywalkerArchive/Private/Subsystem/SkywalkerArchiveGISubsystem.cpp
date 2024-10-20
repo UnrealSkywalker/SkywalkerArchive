@@ -17,12 +17,24 @@ USkywalkerArchiveGISubsystem::USkywalkerArchiveGISubsystem() :UGameInstanceSubsy
 	}
 }
 
-bool USkywalkerArchiveGISubsystem::IsSaveGameExist(const FString& SlotName, const int32 UserIndex)
+void USkywalkerArchiveGISubsystem::SetSaveGame(const FString& SlotName, const int32 UserIndex)
 {
-	return UGameplayStatics::DoesSaveGameExist(SlotName, UserIndex);
+	SaveGameSlotName = SlotName;
+	SaveGameUserIndex = UserIndex;
 }
 
-bool USkywalkerArchiveGISubsystem::SaveGame(const FString& SlotName, const int32 UserIndex)
+bool USkywalkerArchiveGISubsystem::IsSaveGameExist()
+{
+	if (LocalPlayerSaveGame == nullptr)
+	{
+		UE_LOG(SkywalkerArchive, Error, TEXT("USkywalkerLocalPlayerSaveGame is nullptr!"));
+		return false;
+	}
+
+	return UGameplayStatics::DoesSaveGameExist(SaveGameSlotName, SaveGameUserIndex);
+}
+
+bool USkywalkerArchiveGISubsystem::SaveGame()
 {
 	if (LocalPlayerSaveGame == nullptr)
 	{
@@ -31,10 +43,10 @@ bool USkywalkerArchiveGISubsystem::SaveGame(const FString& SlotName, const int32
 	}
 
 	// ±£¥Ê¥Êµµ
-	return UGameplayStatics::SaveGameToSlot(LocalPlayerSaveGame, SlotName, UserIndex);
+	return UGameplayStatics::SaveGameToSlot(LocalPlayerSaveGame, SaveGameSlotName, SaveGameUserIndex);
 }
 
-bool USkywalkerArchiveGISubsystem::LoadGame(const FString& SlotName, const int32 UserIndex)
+bool USkywalkerArchiveGISubsystem::LoadGame()
 {
 	if (LocalPlayerSaveGame == nullptr)
 	{
@@ -42,7 +54,19 @@ bool USkywalkerArchiveGISubsystem::LoadGame(const FString& SlotName, const int32
 		return false;
 	}
 
-	// TODO: º”‘ÿ¥Êµµ
+	// TODO Shyfan º”‘ÿ¥Êµµ
 
 	return true;
+}
+
+bool USkywalkerArchiveGISubsystem::DeleteGame()
+{
+	if (LocalPlayerSaveGame == nullptr)
+	{
+		UE_LOG(SkywalkerArchive, Error, TEXT("USkywalkerLocalPlayerSaveGame is nullptr!"));
+		return false;
+	}
+
+	// …æ≥˝¥Êµµ
+	return UGameplayStatics::DeleteGameInSlot(SaveGameSlotName, SaveGameUserIndex);
 }

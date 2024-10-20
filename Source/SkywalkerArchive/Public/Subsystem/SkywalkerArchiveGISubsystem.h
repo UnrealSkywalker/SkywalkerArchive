@@ -23,22 +23,34 @@ public:
 	USkywalkerArchiveGISubsystem();
 
 	/**
+	* …Ë÷√¥Êµµ
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
+	void SetSaveGame(const FString& SlotName, const int32 UserIndex);
+
+	/**
 	* ≈–∂œ¥Êµµ «∑Ò¥Ê‘⁄
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
-	bool IsSaveGameExist(const FString& SlotName, const int32 UserIndex);
+	bool IsSaveGameExist();
 
 	/**
 	* ±£¥Ê¥Êµµ
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
-	bool SaveGame(const FString& SlotName, const int32 UserIndex);
+	bool SaveGame();
 
 	/**
 	* º”‘ÿ¥Êµµ
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
-	bool LoadGame(const FString& SlotName, const int32 UserIndex);
+	bool LoadGame();
+
+	/**
+	* …æ≥˝¥Êµµ
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
+	bool DeleteGame();
 
 private:
 	/**
@@ -46,4 +58,14 @@ private:
 	*/
 	UPROPERTY()
 	USkywalkerLocalPlayerSaveGame* LocalPlayerSaveGame = nullptr;
+
+	/**
+	* ¥Êµµ√˚≥∆
+	*/
+	FString SaveGameSlotName = TEXT("SkywalkerLocalPlayerSaveGame");
+
+	/**
+	* UserIndex
+	*/
+	int32 SaveGameUserIndex = 0;
 };
