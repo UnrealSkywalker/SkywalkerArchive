@@ -9,7 +9,7 @@ DEFINE_LOG_CATEGORY_STATIC(SkywalkerArchive, Log, All);
 
 USkywalkerArchiveGISubsystem::USkywalkerArchiveGISubsystem() :UGameInstanceSubsystem()
 {
-	//// ¥¥Ω® USkywalkerLocalPlayerSaveGame
+	//// ÂàõÂª∫ USkywalkerLocalPlayerSaveGame
 	//LocalPlayerSaveGame = Cast<USkywalkerLocalPlayerSaveGame>(UGameplayStatics::CreateSaveGameObject(USkywalkerLocalPlayerSaveGame::StaticClass()));
 	//if (LocalPlayerSaveGame == nullptr)
 	//{
@@ -31,7 +31,7 @@ bool USkywalkerArchiveGISubsystem::CreateSaveGameObject(TSubclassOf<USkywalkerLo
 		return false;
 	}
 
-	// ¥¥Ω® USkywalkerLocalPlayerSaveGame
+	// ÂàõÂª∫ USkywalkerLocalPlayerSaveGame
 	LocalPlayerSaveGame = Cast<USkywalkerLocalPlayerSaveGame>(UGameplayStatics::CreateSaveGameObject(SaveGameClass));
 	if (LocalPlayerSaveGame == nullptr)
 	{
@@ -67,7 +67,7 @@ bool USkywalkerArchiveGISubsystem::SaveGame()
 		return false;
 	}
 
-	// ±£¥Ê¥Êµµ
+	// ‰øùÂ≠òÂ≠òÊ°£
 	return UGameplayStatics::SaveGameToSlot(LocalPlayerSaveGame, SaveGameSlotName, SaveGameUserIndex);
 }
 
@@ -79,7 +79,7 @@ bool USkywalkerArchiveGISubsystem::LoadGame()
 		return false;
 	}
 
-	// TODO Shyfan º”‘ÿ¥Êµµ
+	// TODO Shyfan Âä†ËΩΩÂ≠òÊ°£
 
 	return true;
 }
@@ -92,6 +92,6 @@ bool USkywalkerArchiveGISubsystem::DeleteGame()
 		return false;
 	}
 
-	// …æ≥˝¥Êµµ
+	// Âà†Èô§Â≠òÊ°£
 	return UGameplayStatics::DeleteGameInSlot(SaveGameSlotName, SaveGameUserIndex);
 }
