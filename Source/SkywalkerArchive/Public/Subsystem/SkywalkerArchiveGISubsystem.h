@@ -19,59 +19,64 @@ class SKYWALKERARCHIVE_API USkywalkerArchiveGISubsystem : public UGameInstanceSu
 	GENERATED_BODY()
 
 public:
-
 	USkywalkerArchiveGISubsystem();
 
 	/**
-	* ´´½¨´æµµ¶ÔÏó
-	*/
+	 * åˆ›å»ºå­˜æ¡£å¯¹è±¡
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
 	bool CreateSaveGameObject(TSubclassOf<USkywalkerLocalPlayerSaveGame> SaveGameClass);
 
 	/**
-	* ÉèÖÃ´æµµ
-	*/
+	 * è®¾ç½®å­˜æ¡£
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
-	void SetSaveGame(const FString& SlotName, const int32 UserIndex);
+	void SetSaveGame(const FString &SlotName, const int32 UserIndex);
 
 	/**
-	* ÅĞ¶Ï´æµµÊÇ·ñ´æÔÚ
-	*/
+	 * åˆ¤æ–­å­˜æ¡£æ˜¯å¦å­˜åœ¨
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
 	bool IsSaveGameExist();
 
 	/**
-	* ±£´æ´æµµ
-	*/
+	 * ä¿å­˜å­˜æ¡£
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
 	bool SaveGame();
 
 	/**
-	* ¼ÓÔØ´æµµ
-	*/
+	 * åŠ è½½å­˜æ¡£
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
 	bool LoadGame();
 
 	/**
-	* É¾³ı´æµµ
-	*/
+	 * åˆ é™¤å­˜æ¡£
+	 */
 	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
 	bool DeleteGame();
 
+	/**
+	 * è·å–å­˜æ¡£
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Skywalker|SaveGame")
+	USkywalkerLocalPlayerSaveGame *GetSaveGame();
+
 private:
 	/**
-	* SkywalkerLocalPlayerSaveGame ÊµÀı
-	*/
+	 * SkywalkerLocalPlayerSaveGame å®ä¾‹
+	 */
 	UPROPERTY()
-	USkywalkerLocalPlayerSaveGame* LocalPlayerSaveGame = nullptr;
+	USkywalkerLocalPlayerSaveGame *LocalPlayerSaveGame = nullptr;
 
 	/**
-	* ´æµµÃû³Æ
-	*/
+	 * å­˜æ¡£åç§°
+	 */
 	FString SaveGameSlotName = TEXT("SkywalkerLocalPlayerSaveGame");
 
 	/**
-	* UserIndex
-	*/
+	 * UserIndex
+	 */
 	int32 SaveGameUserIndex = 0;
 };
